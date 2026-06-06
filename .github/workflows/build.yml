@@ -29,6 +29,13 @@ jobs:
       - name: 📥 Install dependencies
         run: npm install --legacy-peer-deps
 
+      - name: 🏗️ Setup Android project
+        run: |
+          cd android
+          gradle wrapper --gradle-version=8.6
+        env:
+          GRADLE_USER_HOME: ${{ runner.temp }}/.gradle
+
       - name: 🔑 Generate debug keystore
         run: |
           cd android/app
@@ -49,7 +56,6 @@ jobs:
           cd android
           ./gradlew assembleRelease \
             --no-daemon \
-            --stacktrace \
             -x lint \
             -x test
 
@@ -59,12 +65,3 @@ jobs:
           name: quran-app-apk
           path: android/app/build/outputs/apk/release/app-release.apk
           retention-days: 30
-
-      - name: ✅ Build Summary
-        run: |
-          echo "## 🕌 قرآننا هداية - Build Complete" >> $GITHUB_STEP_SUMMARY
-          echo "| Property | Value |" >> $GITHUB_STEP_SUMMARY
-          echo "|---|---|" >> $GITHUB_STEP_SUMMARY
-          echo "| Platform | Android APK |" >> $GITHUB_STEP_SUMMARY
-          echo "| Version | 1.0.0 |" >> $GITHUB_STEP_SUMMARY
-          echo "| Date | $(date) |" >> $GITHUB_STEP_SUMMARY
