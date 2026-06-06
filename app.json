@@ -1,4 +1,19 @@
 {
-  "name": "QuranApp",
-  "displayName": "قرآننا هداية"
+  "expo": {
+    "name": "قرآننا هداية",
+    "slug": "quran-hidaya",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "android": {
+      "package": "com.quranapp.hidaya",
+      "adaptiveIcon": {
+        "backgroundColor": "#0A0E1A"
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "quran-hidaya"
+      }
+    }
+  }
 }
